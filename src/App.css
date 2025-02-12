@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+.custom-tag::before {
+  content: "🔷 " attr(data-content) " ";
+  color: white;
+  background: #0078d4;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}

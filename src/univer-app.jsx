@@ -2,7 +2,7 @@ import {useEffect, useRef} from 'react'
 import {createUniver, defaultTheme, LocaleType, merge} from '@univerjs/presets'
 import {UniverSheetsCorePreset} from '@univerjs/presets/preset-sheets-core'
 import UniverPresetSheetsCoreZhCN from '@univerjs/presets/preset-sheets-core/locales/zh-CN'
-import {CopyCommand} from '@univerjs/ui'
+import {CopyCommand, PasteCommand} from '@univerjs/ui'
 
 import '@univerjs/presets/lib/styles/preset-sheets-core.css'
 import {BooleanNumber, SheetTypes} from '@univerjs/core'
@@ -51,6 +51,21 @@ export function App() {
   const univerAPI = useRef(null)
   const tableDataRef = useRef(null)
 
+  function jsonToTsv(jsonData) {
+    // 提取列名
+    let headers = jsonData[0].filter(header => header !== '')
+
+    // 处理数据行
+    let rows = jsonData.slice(1).map(row =>
+      row.slice(0, headers.length).map(value =>
+        (typeof value === 'string' && value.includes('\t')) ? `"${value}"` : value
+      ).join('\t')
+    )
+
+    // 组合成TSV格式字符串
+    return [headers.join('\t'), ...rows].join('\n')
+  }
+
   const getActiveTableData = async () => {
     const activeWorkbook = univerAPI.current.getActiveWorkbook()
     const sheet = activeWorkbook.getActiveSheet()
@@ -59,17 +74,7 @@ export function App() {
     const maxRows = sheet.getMaxRows()
     const sourceRange = sheet.getRange(0, 0, maxRows, maxCols)
     sheet.setActiveSelection(sourceRange)
-
-    const clipboardContent = await navigator.clipboard.readText()
-    await univerAPI.current.executeCommand(CopyCommand.id)
-    const csvData = (await navigator.clipboard.readText()).trim()
-
-    console.log(csvData)
-    navigator.clipboard.writeText(clipboardContent)
-
-    tableDataRef.current = activeWorkbook.save()
-
-    init(tableDataRef.current)
+    console.log(jsonToTsv(sourceRange.getValues()))
   }
 
   const init = (data) => {

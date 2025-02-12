@@ -3,3 +3,25 @@ html, #root, body {
   margin: 0;
   padding: 0;
 }
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+.tooltip {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px;
+  margin-top: 4px;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 10;
+}

@@ -1,4 +1,4 @@
-import UniverApp from './univer-app.jsx'
+import UniverApp from './code-mirror-editor.jsx'
 
 const App = () => {
   return (
