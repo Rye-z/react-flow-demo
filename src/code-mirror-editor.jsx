@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react'
+import {useRef, useEffect, useState} from 'react'
 import {
   EditorState,
   StateField,
@@ -14,6 +14,7 @@ import {
 import { python } from "@codemirror/lang-python";
 import { autocompletion } from "@codemirror/autocomplete";
 import { createRoot } from "react-dom/client";
+import { defaultKeymap } from "@codemirror/commands";
 
 // 1. 定义用于展示的 React 组件
 const MyReactComponent = () => {
@@ -197,11 +198,12 @@ print('Hello, world!')
 # 点击右侧标签插入 React 组件标签到这里
 `,
       extensions: [
-        python(),             // Python 语法高亮
-        autocompletion(),     // 代码补全
-        widgetDecorationField, // 将标签文本替换为 React 组件 widget（atomic: true）
-        atomicWidgetKeymap    // 自定义删除键盘命令，保证 atomic decoration 整体删除
-      ]
+         python(),             // Python 语法高亮
+         autocompletion(),     // 代码补全
+         widgetDecorationField,// 用于替换标签文本为 React 组件 widget（atomic: true）
+         atomicWidgetKeymap,
+         keymap.of(defaultKeymap)    // 合并默认键盘映射和自定义键盘命令
+        ]
     });
 
     editorViewRef.current = new EditorView({

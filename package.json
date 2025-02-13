@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.18.5",
+    "@codemirror/commands": "^6.8.0",
     "@codemirror/lang-python": "^6.1.7",
     "@codemirror/state": "^6.5.2",
     "@codemirror/view": "^6.36.2",
     "@monaco-editor/react": "^4.6.0",
+    "@uiw/react-codemirror": "^4.23.8",
     "@univerjs/core": "^0.5.5",
     "@univerjs/design": "^0.5.5",
     "@univerjs/docs": "^0.5.5",
