@@ -1,8 +1,8 @@
-import UniverApp from './code-mirror-editor.jsx'
+import Demo from './demo.jsx'
 
 const App = () => {
   return (
-    <UniverApp/>
+    <Demo/>
   )
 }
 
