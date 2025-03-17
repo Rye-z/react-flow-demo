@@ -34,6 +34,7 @@
     "@univerjs/ui": "^0.5.5",
     "ahooks": "^3.8.4",
     "diff": "^7.0.0",
+    "immer": "^10.1.1",
     "monaco-editor": "^0.52.2",
     "monaco-languageclient": "^9.3.0",
     "monaco-pyright-lsp": "^0.1.7",

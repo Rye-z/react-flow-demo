@@ -1,4 +1,4 @@
-import Demo from './demo.jsx'
+import Demo from './demo-useCallback_useMemoizedFn.jsx'
 
 const App = () => {
   return (
